@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/persons")
@@ -23,5 +24,20 @@ public class PersonController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(persons);
+    }
+
+    @GetMapping("/by-age-less-than")
+    public ResponseEntity<List<Person>> getPersonsByAgeLessThan(@RequestParam Integer age) {
+        List<Person> persons = personService.getPersonsByAgeLessThan(age);
+        if (persons.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(persons);
+    }
+
+    @GetMapping("/by-name-and-surname")
+    public ResponseEntity<Person> getPersonByNameAndSurname(@RequestParam String name, @RequestParam String surname) {
+        Optional<Person> person = personService.getPersonByNameAndSurname(name, surname);
+        return person.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
     }
 }
