@@ -31,7 +31,7 @@ public class Person {
     @Column(name = "city_of_living")
     private String cityOfLiving;
 
-        public String getName() {
+    public String getName() {
         return name;
     }
 
