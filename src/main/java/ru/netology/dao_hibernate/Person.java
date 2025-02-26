@@ -7,19 +7,19 @@ import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "PERSONS")
+@IdClass(PersonId.class)
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @NotBlank(message = "Name is mandatory")
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Id
     @NotBlank(message = "Surname is mandatory")
     @Column(name = "surname", nullable = false)
     private String surname;
 
+    @Id
     @NotNull(message = "Age is mandatory")
     @Positive(message = "Age must be positive")
     @Column(name = "age", nullable = false)
@@ -31,15 +31,7 @@ public class Person {
     @Column(name = "city_of_living")
     private String cityOfLiving;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
+        public String getName() {
         return name;
     }
 
