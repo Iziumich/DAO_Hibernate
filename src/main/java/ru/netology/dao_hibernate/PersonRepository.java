@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface PersonRepository extends JpaRepository<Person, PersonId> {
 
     @Query("SELECT p FROM Person p WHERE p.cityOfLiving = :city")
     List<Person> findByCityOfLiving(@Param("city") String city);
